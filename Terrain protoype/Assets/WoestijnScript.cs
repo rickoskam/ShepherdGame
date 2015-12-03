@@ -16,7 +16,9 @@ public class WoestijnScript : MonoBehaviour {
 		int heightmapz = terraindata.heightmapHeight;
 		float [] positionsx = new float[aantalHeuvels];
 		float [] positionsz = new  float[aantalHeuvels];
-		float [,] waterpositie = new float[3,aantalVijvers]; 
+		float [] waterx = new int[aantalVijvers]; 
+		float [] waterz = new int[aantalVijvers]; 
+		float [] waterr = new int[aantalVijvers]; 
 		GameObject hekPrefab = Resources.Load ("Hekje") as GameObject;
 		GameObject Schaap = Resources.Load ("sheep") as GameObject;
 		GameObject Steen = Resources.Load ("RockMesh") as GameObject;
@@ -33,8 +35,8 @@ public class WoestijnScript : MonoBehaviour {
 		float eindx  = 0.5f * (float)terrainsizex + 0.5f * (float)levelsizex;
 		float beginz = 0.5f * (float)terrainsizez - 0.5f * (float)levelsizez;
 		float eindz  = 0.5f * (float)terrainsizez + 0.5f * (float)levelsizez;
-		int hmlevellengthx = (int)(heightmapx * verhoudingx);
-		int hmlevellengthz = (int)(heightmapz * verhoudingz);
+		float hmlevellengthx = (int)(heightmapx * verhoudingx);
+		float hmlevellengthz = (int)(heightmapz * verhoudingz);
 		int hmlevelbeginx  = (int)(0.5 * heightmapx - 0.5 * hmlevellengthx);
 		int hmleveleindx   = (int)(0.5 * heightmapx + 0.5 * hmlevellengthx);
 		int hmlevelbeginz  = (int)(0.5 * heightmapx - 0.5 * hmlevellengthz);
@@ -79,10 +81,10 @@ public class WoestijnScript : MonoBehaviour {
 			int vijverradius = (int) (Random.Range(minradius,maxradius));
 			int xbegin = (int) (Random.Range (hmlevelbeginx+maxradius,hmleveleindx-maxradius));
 			int zbegin = (int) (Random.Range (hmlevelbeginz+maxradius,hmleveleindz-maxradius));
-			waterpositie[0,i] = xbegin;
-			waterpositie[1,i] = zbegin;
-			waterpositie[2,i] = vijverradius;
-			for(int r = 1; r < vijverradius; r++){
+			waterx[i] = xbegin;
+			waterz[i] = zbegin;
+			waterr[i] = vijverradius;
+			for(int r = 0; r < vijverradius; r++){
 				for(int d = 0; d < 360; d++){
 					int x = xbegin + (int)(r*Mathf.Cos(d*Mathf.PI/180));
 					int z = zbegin + (int)(r*Mathf.Sin(d*Mathf.PI/180));
@@ -148,7 +150,7 @@ public class WoestijnScript : MonoBehaviour {
 				}
 			}
 		}
-		
+
 		//hekjes spawnen
 		int aantalhekjesx = (int)(levelsizex / lengteHek);
 		int aantalhekjesz = (int)(levelsizez / lengteHek);
@@ -224,12 +226,10 @@ public class WoestijnScript : MonoBehaviour {
 		//bomen spawnen
 		GameObject Palmboom = Resources.Load ("Palm1") as GameObject;
 		for(int i = 0; i<aantalBomen; i++){
-			float x = Random.Range(beginx,eindx);
-			float z = Random.Range(beginx,eindx);
-			if(watercheck(waterpositie, x*heightmapx/terrainsizex, z*heightmapz/terrainsizez)>0){
-				GameObject palm = Instantiate(Palmboom);
-				palm.transform.position = new Vector3(x,3.9f,z);
-			}
+			int x = waterx[0];
+			int z = waterz[0];
+			GameObject palm = Instantiate(Palmboom);
+			palm.transform.position = new Vector3(x*terrainsizex/heightmapx,3.9f,z*terrainsizez/heightmapz);
 		}
 	}
 	public bool positioncheck(float x, float z, float[] xh, float[] zh){
@@ -243,17 +243,24 @@ public class WoestijnScript : MonoBehaviour {
 		}
 		return true;
 	}
-	public float watercheck(float [,] p, float x, float z){
+	public bool watercheck(float [] waterx, float [] waterz, float [] waterstraal, float x, float z){
 		float distance = 1000;
 		for (int i = 0; i < aantalVijvers; i ++) {
-			float xw = p [0, i];
-			float zw = p [1, i];
-			float r  = p [2, i];
+			float xw = waterx[i];
+			float zw = waterz[i];
+			float r  = waterstraal[i];
 			float disx = x - xw;
 			float disz = z - zw;
-			distance = Mathf.Min (distance, Mathf.Sqrt(disx*disx + disz*disz)-r);
+			distance = Vector2.Distance(new Vector2(x,z),new Vector2(xw,zw));
+			float afstandrand = distance -r;
+			print (afstandrand);
+			if((afstandrand)>1&&(afstandrand)<2){
+				print (true);
+				return true;
+			}
 		}
-		return distance;
+		print (false);
+		return false;
 	}
 	private void Smooth()
 	{
