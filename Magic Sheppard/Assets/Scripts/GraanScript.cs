@@ -27,6 +27,7 @@ public class GraanScript : MonoBehaviour {
             graantje = false;
 			StartCoroutine(TimerGraan());
             aantrekking = true;
+            Herder.score = Herder.score - 100;
 		}
         if (aantrekking == true)
         {

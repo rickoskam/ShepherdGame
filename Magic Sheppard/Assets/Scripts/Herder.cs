@@ -3,12 +3,15 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class Herder : MonoBehaviour {
+    bool a = true;
 	float speed = 15;
 	float rotatespeed = 10;
     float rotatecamera = 8;
     float positiecameray = 4;
     float positiecameraz = 1;
     public Text Wintext;
+    public Text ScoreWintext;
+    public Text Score;
     public Slider Ziekschaapslider;
     public Image Ziekschaapimage;
     public Text Aantalschapeninveld;
@@ -17,22 +20,37 @@ public class Herder : MonoBehaviour {
     public Button Resumebutton;
     public Button FFButton1;
     public Button FFButton2;
+    public Image TrofeeWin;
+    public Image ScoreWin;
+    public static float score = 1000;
     int keuz;
+    public Image Schaapimage;
+    public Image Barnimage;
+    public Image Sterimage;
+    public Image Graanimage;
+    public Image Hondimage;
+    public Text Aantalgraan;
+    public Text Aantalhond;
 
 
     // Use this for initialization
     void Start () {
         Wintext.text = "";
+        ScoreWintext.text = "";
         Ziekschaapslider.gameObject.SetActive(false);
         Ziekschaapimage.gameObject.SetActive(false);
         Pausebutton.gameObject.SetActive(true);
         Resumebutton.gameObject.SetActive(false);
         FFButton1.gameObject.SetActive(true);
         FFButton2.gameObject.SetActive(true);
+        TrofeeWin.gameObject.SetActive(false);
+        ScoreWin.gameObject.SetActive(false);
+        SetScore();
     }
 	
 	// Update is called once per frame
 	void Update () {
+        SetScore();
         var C = GameObject.FindGameObjectWithTag("MainCamera");
         if (Input.GetAxis("Mouse X")>0)
 		{
@@ -103,6 +121,8 @@ public class Herder : MonoBehaviour {
                     Ziekschaapslider.value = 20;
                     Ziekschaapslider.gameObject.SetActive(false);
                     Ziekschaapimage.gameObject.SetActive(false);
+                    score = score + 500;
+                    SetScore();
                 }
             }
         }
@@ -167,7 +187,32 @@ public class Herder : MonoBehaviour {
 
         if (isl == 0 && leng == 0 && gsl > 0)
         {
+            if (a == true)
+            {
+                score = score + 555;
+                SetScore();
+                a = false;
+            }
             Wintext.text = "YOU WIN!";
+            ScoreWintext.text = "" + score;
+            TrofeeWin.gameObject.SetActive(true);
+            ScoreWin.gameObject.SetActive(true);
+            Ziekschaapslider.gameObject.SetActive(false);
+            Ziekschaapimage.gameObject.SetActive(false);
+            Aantalschapeninbarn.gameObject.SetActive(false);
+            Aantalschapeninveld.gameObject.SetActive(false);
+            Pausebutton.gameObject.SetActive(false);
+            Resumebutton.gameObject.SetActive(false);
+            FFButton1.gameObject.SetActive(false);
+            FFButton2.gameObject.SetActive(false);
+            Schaapimage.gameObject.SetActive(false);
+            Barnimage.gameObject.SetActive(false);
+            Sterimage.gameObject.SetActive(false);
+            Graanimage.gameObject.SetActive(false);
+            Hondimage.gameObject.SetActive(false);
+            Aantalgraan.gameObject.SetActive(false);
+            Aantalhond.gameObject.SetActive(false);
+            Score.gameObject.SetActive(false);
         }
 
         if (isl == 0 && leng == 0 && gsl == 0)
@@ -325,5 +370,10 @@ public class Herder : MonoBehaviour {
         FFButton1.gameObject.SetActive(false);
         FFButton2.gameObject.SetActive(false);
         Time.timeScale = 1.5f;
+    }
+
+    void SetScore()
+    {
+        Score.text = "" + score;
     }
 }

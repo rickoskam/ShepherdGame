@@ -19,6 +19,7 @@ public class DeurScript : MonoBehaviour {
         {
             GameObject schaap = other.gameObject;
             schaap.tag="GevangenSchaap";
+            Herder.score = Herder.score + 1000;
         }
     }
 }

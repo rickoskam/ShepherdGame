@@ -80,6 +80,7 @@ public class HondScript : MonoBehaviour {
                 aantalhondengekocht = aantalhondengekocht - 1;
                 SetAantalHondenText();
                 StartCoroutine(Ronddraaien());
+                Herder.score = Herder.score - 100;
             }
 
             if (aan == true)
