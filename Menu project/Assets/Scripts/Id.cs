@@ -3,6 +3,7 @@ using System.Collections;
 
 public class Id : MonoBehaviour
 {
+    private static string name;
 
     public void disable()
     {
@@ -20,4 +21,15 @@ public class Id : MonoBehaviour
         Application.Quit();
 
     }
+    public void setname(string n)
+    {
+        name = n;
+        Debug.Log(name);
+    }
+
+public string getname()
+    {
+        return name;
+    }
+
 }
