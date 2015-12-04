@@ -3,7 +3,8 @@ using System.Collections;
 
 public class Id : MonoBehaviour
 {
-    private static string name;
+
+    public static string name;
 
     public void disable()
     {

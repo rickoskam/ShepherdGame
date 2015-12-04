@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class link : MonoBehaviour {
+    public static int a = 1;
 
 	public void link1()
     {

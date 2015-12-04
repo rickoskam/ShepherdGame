@@ -8,7 +8,8 @@ public class MovingCamera : MonoBehaviour {
     
     // Use this for initialization
    
-
+       
+       
     // Update is called once per frame
     void Update () {
         transform.Translate(new Vector3(0.0f, y2*Time.deltaTime*speed, 0.0f));

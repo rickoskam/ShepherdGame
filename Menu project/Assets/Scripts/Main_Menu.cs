@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class Main_Menu : MonoBehaviour {
-
+   
     public void Quitgame()
     {
         Debug.Log("Game is exiting...");
