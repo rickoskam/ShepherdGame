@@ -164,59 +164,32 @@ public class WeideScript : MonoBehaviour {
 		int aantalhekjesz = (int)(levelsizez / lengteHek);
 		for (int i = 1; i < aantalhekjesx+2; i++) {
 			GameObject hek = Instantiate(hekPrefab);
-			hek.transform.position = new Vector3 (beginx + i * lengteHek, 100, beginz);
-			RaycastHit test;
-			Ray testray = new Ray(hek.transform.position, Vector3.down);
-			if (Physics.Raycast(testray, out test)) {
-				hek.transform.Translate(new Vector3(0,-test.distance,0));
-			}
+			hek.transform.position = new Vector3 (beginx + i * lengteHek, terrain.SampleHeight(new Vector3(0,0,0)), beginz);
 		}
 		for (int i = 1; i < aantalhekjesx+2; i++) {
 			GameObject hek2 = Instantiate(hekPrefab);
-			hek2.transform.position = new Vector3 (beginx + i * lengteHek, 100, eindz);
-			RaycastHit test;
-			Ray testray = new Ray(hek2.transform.position, Vector3.down);
-			if (Physics.Raycast(testray, out test)) {
-				hek2.transform.Translate(new Vector3(0,-test.distance,0));
-			}
+			hek2.transform.position = new Vector3 (beginx + i * lengteHek, terrain.SampleHeight(new Vector3(0,0,0)), eindz);
 			if(i == (int)(aantalhekjesx/2)){
 				hek2.tag = "Hek";
 			}
 		}
 		for (int i = 1; i < aantalhekjesx+2; i++) {
 			GameObject hek2 = Instantiate(hekPrefab);
-			hek2.transform.position = new Vector3 (beginx + i * lengteHek, 100, eindz+2*lengteHek);
-			RaycastHit test;
-			Ray testray = new Ray(hek2.transform.position, Vector3.down);
-			if (Physics.Raycast(testray, out test)) {
-				hek2.transform.Translate(new Vector3(0,-test.distance,0));
-			}
+			hek2.transform.position = new Vector3 (beginx + i * lengteHek, terrain.SampleHeight(new Vector3(0,0,0)), eindz+2*lengteHek);
 			GameObject schaap = Instantiate (Schaap);
-			schaap.transform.position = new Vector3 (beginx + i * lengteHek,100 -test.distance, eindz + lengteHek);
-			schaap.transform.localScale = new Vector3(3,3,3);
+			schaap.transform.position = new Vector3 (beginx + i * lengteHek,terrain.SampleHeight(new Vector3(0,0,0)), eindz + lengteHek);
 			schaap.transform.eulerAngles = new Vector3(0,Random.value*360,0);
 		}
 		for (int i = 0; i < aantalhekjesz+3; i++) {
 			GameObject hek = Instantiate(hekPrefab);
-			hek.transform.position = new Vector3 (beginx, 100, beginz+ i*lengteHek);
-			RaycastHit test;
-			Ray testray = new Ray(hek.transform.position, Vector3.down);
-			if (Physics.Raycast(testray, out test)) {
-				hek.transform.Translate(new Vector3(0,-test.distance,0));
-			}
+			hek.transform.position = new Vector3 (beginx, terrain.SampleHeight(new Vector3(0,0,0)), beginz+ i*lengteHek);
 			hek.transform.eulerAngles = new Vector3(0,90,0);
 		}
 		for (int i = 0; i < aantalhekjesz+3; i++) {
 			GameObject hek2 = Instantiate(hekPrefab);
-			hek2.transform.position = new Vector3 (eindx, 100, beginz + i*lengteHek);
-			RaycastHit test;
-			Ray testray = new Ray(hek2.transform.position, Vector3.down);
-			if (Physics.Raycast(testray, out test)) {
-				hek2.transform.Translate(new Vector3(0,-test.distance,0));
-			}
+			hek2.transform.position = new Vector3 (eindx, terrain.SampleHeight(new Vector3(0,0,0)), beginz + i*lengteHek);
 			hek2.transform.eulerAngles = new Vector3(0,90,0);
 		}
-
 		//stenen spawnen
 		for(int i = 0; i<3;i++){
 		GameObject steen = Instantiate(Steen);
