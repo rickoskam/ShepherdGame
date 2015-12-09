@@ -86,7 +86,10 @@
     <Compile Include="Assets\Scripts\MovingCamera.cs" />
     <Compile Include="Assets\Scripts\Options.cs" />
     <Compile Include="Assets\Scripts\PostData.cs" />
+    <Compile Include="Assets\Scripts\PostData2.cs" />
+    <Compile Include="Assets\Scripts\PostData3.cs" />
     <Compile Include="Assets\Scripts\TEST.cs" />
+    <Compile Include="Assets\Scripts\hover.cs" />
     <Compile Include="Assets\Scripts\link.cs" />
     <Compile Include="Assets\Scripts\onlineData.cs" />
     <Compile Include="Assets\Scripts\test1.cs" />
