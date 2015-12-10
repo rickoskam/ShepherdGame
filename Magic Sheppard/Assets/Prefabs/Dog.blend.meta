@@ -1,0 +1,127 @@
+fileFormatVersion: 2
+guid: d230c28d37f0c734dbf1947a4aee90b0
+timeCreated: 1449657305
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: Cylinder
+    100002: //RootNode
+    100004: DogArmature
+    100006: FFoot_L
+    100008: FFoot_R
+    100010: FShin_L
+    100012: FShin_R
+    100014: FThigh_L
+    100016: FThigh_R
+    100018: Head
+    100020: Hip
+    100022: Master
+    100024: Neck
+    100026: RFoot_L
+    100028: RFoot_R
+    100030: Ribcage
+    100032: RLeg_L
+    100034: RLeg_R
+    100036: RShin_L
+    100038: RShin_R
+    100040: RThigh_L
+    100042: RThigh_R
+    100044: Spine
+    100046: Tail1
+    100048: Tail2
+    100050: TailBase
+    400000: Cylinder
+    400002: //RootNode
+    400004: DogArmature
+    400006: FFoot_L
+    400008: FFoot_R
+    400010: FShin_L
+    400012: FShin_R
+    400014: FThigh_L
+    400016: FThigh_R
+    400018: Head
+    400020: Hip
+    400022: Master
+    400024: Neck
+    400026: RFoot_L
+    400028: RFoot_R
+    400030: Ribcage
+    400032: RLeg_L
+    400034: RLeg_R
+    400036: RShin_L
+    400038: RShin_R
+    400040: RThigh_L
+    400042: RThigh_R
+    400044: Spine
+    400046: Tail1
+    400048: Tail2
+    400050: TailBase
+    4300000: Cylinder
+    7400000: Default Take
+    9500000: //RootNode
+    13700000: Cylinder
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

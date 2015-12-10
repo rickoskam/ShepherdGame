@@ -5,11 +5,13 @@ using System.Collections;
 public class GraanWinkelScript : MonoBehaviour {
     public Text AantalGraanText;
     public Text AantalCoinsText;
-    public static int aantalgraangekocht = 0;
-    public static int aantalcoins = 10;
+    public static int aantalgraangekocht;
+    public static int aantalcoins;
 
 	// Use this for initialization
 	void Start () {
+        aantalgraangekocht = 0;
+        aantalcoins = 10;
         SetAantalGraan();
         SetAantalCoins();
 	}

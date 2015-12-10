@@ -17,6 +17,6 @@ public class CameraScript : MonoBehaviour {
 
     public void OnMouseOver()
     {
-         Application.LoadLevel("Game");
+         Application.LoadLevel("Level1");
     }
 }

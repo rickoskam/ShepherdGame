@@ -22,7 +22,8 @@ public class Herder : MonoBehaviour {
     public Button FFButton2;
     public Image TrofeeWin;
     public Image ScoreWin;
-    public static float score = 1000;
+    public Canvas MenuCanvas;
+    public static float score;
     int keuz;
     public Image Schaapimage;
     public Image Barnimage;
@@ -31,10 +32,16 @@ public class Herder : MonoBehaviour {
     public Image Hondimage;
     public Text Aantalgraan;
     public Text Aantalhond;
-
+    public Text Menu;
+    public Canvas ChangeVolume;
+    public Canvas Controlscanvas;
+    public Canvas Quitcanvas;
+    public Button Nextlevel;
 
     // Use this for initialization
     void Start () {
+        score = 1000;
+        SetScore();
         Wintext.text = "";
         ScoreWintext.text = "";
         Ziekschaapslider.gameObject.SetActive(false);
@@ -46,10 +53,21 @@ public class Herder : MonoBehaviour {
         TrofeeWin.gameObject.SetActive(false);
         ScoreWin.gameObject.SetActive(false);
         SetScore();
+        MenuCanvas.gameObject.SetActive(false);
+        Menu.gameObject.SetActive(false);
+        ChangeVolume.gameObject.SetActive(false);
+        Controlscanvas.gameObject.SetActive(false);
+        Quitcanvas.gameObject.SetActive(false);
+        Nextlevel.gameObject.SetActive(false);
     }
 	
 	// Update is called once per frame
 	void Update () {
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            Pause();
+        }
+        // Vraag voor Bas: Hoezo niet escape om te resumen?
         SetScore();
         var C = GameObject.FindGameObjectWithTag("MainCamera");
         if (Input.GetAxis("Mouse X")>0)
@@ -197,6 +215,7 @@ public class Herder : MonoBehaviour {
             ScoreWintext.text = "" + score;
             TrofeeWin.gameObject.SetActive(true);
             ScoreWin.gameObject.SetActive(true);
+            Nextlevel.gameObject.SetActive(true);
             Ziekschaapslider.gameObject.SetActive(false);
             Ziekschaapimage.gameObject.SetActive(false);
             Aantalschapeninbarn.gameObject.SetActive(false);
@@ -218,6 +237,22 @@ public class Herder : MonoBehaviour {
         if (isl == 0 && leng == 0 && gsl == 0)
         {
             Wintext.text = "GAME OVER";
+            Ziekschaapslider.gameObject.SetActive(false);
+            Ziekschaapimage.gameObject.SetActive(false);
+            Aantalschapeninbarn.gameObject.SetActive(false);
+            Aantalschapeninveld.gameObject.SetActive(false);
+            Pausebutton.gameObject.SetActive(false);
+            Resumebutton.gameObject.SetActive(false);
+            FFButton1.gameObject.SetActive(false);
+            FFButton2.gameObject.SetActive(false);
+            Schaapimage.gameObject.SetActive(false);
+            Barnimage.gameObject.SetActive(false);
+            Sterimage.gameObject.SetActive(false);
+            Graanimage.gameObject.SetActive(false);
+            Hondimage.gameObject.SetActive(false);
+            Aantalgraan.gameObject.SetActive(false);
+            Aantalhond.gameObject.SetActive(false);
+            Score.gameObject.SetActive(false);
         }
     }
 
@@ -351,6 +386,8 @@ public class Herder : MonoBehaviour {
         Resumebutton.gameObject.SetActive(true);
         FFButton1.gameObject.SetActive(false);
         FFButton2.gameObject.SetActive(false);
+        Menu.gameObject.SetActive(true);
+        MenuCanvas.gameObject.SetActive(true);
         Time.timeScale = 0;
     }
 
@@ -360,6 +397,8 @@ public class Herder : MonoBehaviour {
         Pausebutton.gameObject.SetActive(true);
         FFButton1.gameObject.SetActive(true);
         FFButton2.gameObject.SetActive(true);
+        Menu.gameObject.SetActive(false);
+        MenuCanvas.gameObject.SetActive(false);
         Time.timeScale = 1;
     }
 
@@ -370,6 +409,39 @@ public class Herder : MonoBehaviour {
         FFButton1.gameObject.SetActive(false);
         FFButton2.gameObject.SetActive(false);
         Time.timeScale = 1.5f;
+    }
+
+    public void ChangeVolumeAction()
+    {
+        MenuCanvas.gameObject.SetActive(false);
+        ChangeVolume.gameObject.SetActive(true);
+    }
+
+    public void BackAction()
+    {
+        ChangeVolume.gameObject.SetActive(false);
+        Controlscanvas.gameObject.SetActive(false);
+        Quitcanvas.gameObject.SetActive(false);
+        MenuCanvas.gameObject.SetActive(true);
+        Menu.gameObject.SetActive(true);
+    }
+    
+    public void ControlsAction()
+    {
+        MenuCanvas.gameObject.SetActive(false);
+        Controlscanvas.gameObject.SetActive(true);
+    }
+
+    public void QuitAction()
+    {
+        Quitcanvas.gameObject.SetActive(true);
+        MenuCanvas.gameObject.SetActive(false);
+        Menu.gameObject.SetActive(false);
+    }
+
+    public void SeriouslyQuit()
+    {
+        Application.LoadLevel("Menu");
     }
 
     void SetScore()
