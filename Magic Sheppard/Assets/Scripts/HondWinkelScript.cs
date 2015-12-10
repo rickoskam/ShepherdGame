@@ -3,12 +3,11 @@ using UnityEngine.UI;
 
 public class HondWinkelScript : MonoBehaviour {
     public Text AantalHondText;
-    public static int aantalhondgekocht;
+    public static int aantalhondgekocht = 0;
 
     // Use this for initialization
     void Start()
     {
-        aantalhondgekocht = 0;
         SetAantalHond();
     }
 
