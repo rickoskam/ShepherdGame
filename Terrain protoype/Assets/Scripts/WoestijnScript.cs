@@ -88,10 +88,7 @@ public class WoestijnScript : MonoBehaviour {
 				for (int d = 0; d < 360; d++) {
 					int x = (int)xbegin + (int)(r * Mathf.Cos (d * Mathf.PI / 180));
 					int z = (int)zbegin + (int)(r * Mathf.Sin (d * Mathf.PI / 180));
-					
-					if (positioncheck (x, z, positionsx, positionsz)) {
-						heights [x, z] = 0;
-					}
+					heights [x, z] = 0;
 				}
 			}
 		}
@@ -106,36 +103,36 @@ public class WoestijnScript : MonoBehaviour {
 		//Hekjes spawnen
 		int aantalhekjesx = (int)(levelsizex / lengteHek);
 		int aantalhekjesz = (int)(levelsizez / lengteHek);
+		float grondhoogte = 12.5f;
 		for (int i = 1; i < aantalhekjesx+2; i++) {
 			GameObject hek = Instantiate (hekPrefab);
-			hek.transform.position = new Vector3 (beginx + i * lengteHek, terrain.SampleHeight (new Vector3 (0, 0, 0)), beginz);
+			hek.transform.position = new Vector3 (beginx + i * lengteHek, grondhoogte, beginz);
 		}
 		for (int i = 1; i < aantalhekjesx+2; i++) {
 			GameObject hek2 = Instantiate (hekPrefab);
-			hek2.transform.position = new Vector3 (beginx + i * lengteHek, terrain.SampleHeight (new Vector3 (0, 0, 0)), eindz);
+			hek2.transform.position = new Vector3 (beginx + i * lengteHek, grondhoogte, eindz);
 			if (i == (int)(aantalhekjesx / 2)) {
 				hek2.tag = "Hek";
 			}
 		}
 		for (int i = 1; i < aantalhekjesx+2; i++) {
 			GameObject hek2 = Instantiate (hekPrefab);
-			hek2.transform.position = new Vector3 (beginx + i * lengteHek, terrain.SampleHeight (new Vector3 (0, 0, 0)), eindz + 2 * lengteHek);
+			hek2.transform.position = new Vector3 (beginx + i * lengteHek, grondhoogte, eindz + 2 * lengteHek);
 			GameObject schaap = Instantiate (Schaap);
-			schaap.transform.position = new Vector3 (beginx + i * lengteHek, terrain.SampleHeight (new Vector3 (0, 0, 0)), eindz + lengteHek);
+			schaap.transform.position = new Vector3 (beginx + i * lengteHek, grondhoogte, eindz + lengteHek);
 			schaap.transform.localScale = new Vector3 (3, 3, 3);
 			schaap.transform.eulerAngles = new Vector3 (0, Random.value * 360, 0);
 		}
 		for (int i = 0; i < aantalhekjesz+3; i++) {
 			GameObject hek = Instantiate (hekPrefab);
-			hek.transform.position = new Vector3 (beginx, terrain.SampleHeight (new Vector3 (0, 0, 0)), beginz + i * lengteHek);
+			hek.transform.position = new Vector3 (beginx, grondhoogte, beginz + i * lengteHek);
 			hek.transform.eulerAngles = new Vector3 (0, 90, 0);
 		}
 		for (int i = 0; i < aantalhekjesz+3; i++) {
 			GameObject hek2 = Instantiate (hekPrefab);
-			hek2.transform.position = new Vector3 (eindx, terrain.SampleHeight (new Vector3 (0, 0, 0)), beginz + i * lengteHek);
+			hek2.transform.position = new Vector3 (eindx, grondhoogte, beginz + i * lengteHek);
 			hek2.transform.eulerAngles = new Vector3 (0, 90, 0);
 		}
-		
 		//stenen spawnen
 		for (int i = 0; i<3; i++) {
 			GameObject steen = Instantiate (Steen);
@@ -160,74 +157,112 @@ public class WoestijnScript : MonoBehaviour {
 		for (int i = 0; i<aantalBomen; i++) {
 			double x = Random.Range (hmlevelbeginx + 2, hmleveleindx - 2);
 			double z = Random.Range (hmlevelbeginz + 2, hmleveleindz - 2);
+			float xx = (float)(z * terrainsizez / heightmapz);
+			float zz = (float)(x * terrainsizex / heightmapx);
 			if (watercheck (waterx, waterz, waterr, x, z) == 1) {
 				float random = Random.value;
 				if (random < (0.16f)) {
 					GameObject palm = Instantiate (Palmboom1);
-					palm.transform.position = new Vector3 ((float)(x * terrainsizex / heightmapx), 1000, (float)(z * terrainsizez / heightmapz));
+					palm.transform.position = new Vector3 (xx, 1000, zz);
 					palm.transform.eulerAngles = new Vector3 (0, Random.Range (0, 360), 0);
 					palm.transform.localScale = new Vector3 (1.3f, 1.3f, 1.3f);
 					RaycastHit test;
 					Ray testray = new Ray (palm.transform.position, Vector3.down);
 					if (Physics.Raycast (testray, out test)) {
-						palm.transform.Translate (new Vector3 (0, -test.distance, 0));
+						if(test.distance<10){
+							palm.transform.Translate (new Vector3 (0, -2000, 0));
+						}
+						else{
+							palm.transform.Translate (new Vector3 (0, -test.distance, 0));
+
+						}
 					}
 				} else if (random > (0.16f) && random < (0.33f)) {
 					GameObject palm = Instantiate (Palmboom2);
-					palm.transform.position = new Vector3 ((float)(z * terrainsizex / heightmapx), 1000, (float)(x * terrainsizez / heightmapz));
+					palm.transform.position = new Vector3 (xx, 1000, zz);
 					palm.transform.eulerAngles = new Vector3 (0, Random.Range (0, 360), 0);
 					palm.transform.localScale = new Vector3 (1.3f, 1.3f, 1.3f);
 					RaycastHit test;
 					Ray testray = new Ray (palm.transform.position, Vector3.down);
 					if (Physics.Raycast (testray, out test)) {
-						palm.transform.Translate (new Vector3 (0, -test.distance, 0));
+						if(test.distance<10){
+							palm.transform.Translate (new Vector3 (0, -2000, 0));
+						}
+						else{
+							palm.transform.Translate (new Vector3 (0, -test.distance, 0));
+							
+						}					
 					}
 				} else if (random > (0.33f) && random < (0.5f)) {
 					GameObject palm = Instantiate (Palmboom3);
-					palm.transform.position = new Vector3 ((float)(z * terrainsizex / heightmapx), 1000, (float)(x * terrainsizez / heightmapz));
+					palm.transform.position = new Vector3 (xx, 1000, zz);
 					palm.transform.eulerAngles = new Vector3 (0, Random.Range (0, 360), 0);
 					palm.transform.localScale = new Vector3 (1.3f, 1.3f, 1.3f);
 					RaycastHit test;
 					Ray testray = new Ray (palm.transform.position, Vector3.down);
 					if (Physics.Raycast (testray, out test)) {
-						palm.transform.Translate (new Vector3 (0, -test.distance, 0));
+						if(test.distance<10){
+							palm.transform.Translate (new Vector3 (0, -2000, 0));
+						}
+						else{
+							palm.transform.Translate (new Vector3 (0, -test.distance, 0));
+							
+						}					
 					}
 				} else if (random > (0.5f) && random < (0.66f)) {
 					GameObject palm = Instantiate (Palmboom4);
-					palm.transform.position = new Vector3 ((float)(z * terrainsizex / heightmapx), 1000, (float)(x * terrainsizez / heightmapz));
+					palm.transform.position = new Vector3 (xx, 1000, zz);
 					palm.transform.eulerAngles = new Vector3 (0, Random.Range (0, 360), 0);
 					palm.transform.localScale = new Vector3 (1.3f, 1.3f, 1.3f);
 					RaycastHit test;
 					Ray testray = new Ray (palm.transform.position, Vector3.down);
 					if (Physics.Raycast (testray, out test)) {
-						palm.transform.Translate (new Vector3 (0, -test.distance, 0));
+						if(test.distance<10){
+							palm.transform.Translate (new Vector3 (0, -2000, 0));
+						}
+						else{
+							palm.transform.Translate (new Vector3 (0, -test.distance, 0));
+							
+						}					
 					}
 				} else if (random > (0.66f) && random < (0.83f)) {
 					GameObject palm = Instantiate (Palmboom5);
-					palm.transform.position = new Vector3 ((float)(z * terrainsizex / heightmapx), 1000, (float)(x * terrainsizez / heightmapz));
+					palm.transform.position = new Vector3 (xx, 1000, zz);
 					palm.transform.eulerAngles = new Vector3 (0, Random.Range (0, 360), 0);
 					palm.transform.localScale = new Vector3 (1.3f, 1.3f, 1.3f);
 					RaycastHit test;
 					Ray testray = new Ray (palm.transform.position, Vector3.down);
 					if (Physics.Raycast (testray, out test)) {
-						palm.transform.Translate (new Vector3 (0, -test.distance, 0));
+						if(test.distance<10){
+							palm.transform.Translate (new Vector3 (0, -2000, 0));
+						}
+						else{
+							palm.transform.Translate (new Vector3 (0, -test.distance, 0));
+							
+						}					
 					}
 				} else {
 					GameObject palm = Instantiate (Palmboom6);
-					palm.transform.position = new Vector3 ((float)(z * terrainsizex / heightmapx), 1000, (float)(x * terrainsizez / heightmapz));
+					palm.transform.position = new Vector3 (xx, 1000, zz);
 					palm.transform.eulerAngles = new Vector3 (0, Random.Range (0, 360), 0);
 					palm.transform.localScale = new Vector3 (1.3f, 1.3f, 1.3f);
 					RaycastHit test;
 					Ray testray = new Ray (palm.transform.position, Vector3.down);
 					if (Physics.Raycast (testray, out test)) {
-						palm.transform.Translate (new Vector3 (0, -test.distance, 0));
+						if(test.distance<10){
+							palm.transform.Translate (new Vector3 (0, -2000, 0));
+						}
+						else{
+							palm.transform.Translate (new Vector3 (0, -test.distance, 0));
+							
+						}				
 					}
 				}
 			}
-			if (watercheck (waterx, waterz, waterr, x, z) == 2 && Random.value < 0.2f) {
+			if (watercheck (waterx, waterz, waterr, x, z) == 2 && Random.value < 0.001f) {
 				if (Random.value > 0.5) {
 					GameObject boom = Instantiate (Dodeboom);
-					boom.transform.position = new Vector3 ((float)(z * terrainsizex / heightmapx), 1000, (float)(x * terrainsizez / heightmapz));
+					boom.transform.position = new Vector3 (xx, 1000, zz);
 					boom.transform.eulerAngles = new Vector3 (0, Random.Range (0, 360), 0);
 					boom.transform.localScale = new Vector3 (2, 2, 2);
 					RaycastHit test;
@@ -238,7 +273,7 @@ public class WoestijnScript : MonoBehaviour {
 				} else {
 					if (Random.value > 0.5) {
 						GameObject cactus = Instantiate (Cactus1);
-						cactus.transform.position = new Vector3 ((float)(z * terrainsizex / heightmapx), 100, (float)(x * terrainsizez / heightmapz));
+						cactus.transform.position = new Vector3 (xx, 1000, zz);
 						cactus.transform.eulerAngles = new Vector3 (0, Random.Range (0, 360), 0);
 						RaycastHit test;
 						Ray testray = new Ray (cactus.transform.position, Vector3.down);
@@ -247,7 +282,7 @@ public class WoestijnScript : MonoBehaviour {
 						}
 					} else {
 						GameObject cactus = Instantiate (Cactus2);
-						cactus.transform.position = new Vector3 ((float)(z * terrainsizex / heightmapx), 100, (float)(x * terrainsizez / heightmapz));
+						cactus.transform.position = new Vector3 (xx, 1000, zz);
 						cactus.transform.eulerAngles = new Vector3 (0, Random.Range (0, 360), 0);
 						RaycastHit test;
 						Ray testray = new Ray (cactus.transform.position, Vector3.down);
@@ -261,8 +296,8 @@ public class WoestijnScript : MonoBehaviour {
 	}
 	public bool positioncheck(float x, float z, float[] xh, float[] zh){
 		for(int i = 0; i < aantalHeuvels; i++){
-			float disx = x - xh[i];
-			float disz = z - zh[i];
+			float disx = x - xh[i]-10;
+			float disz = z - zh[i]+10;
 			float distance = Mathf.Sqrt(disx*disx + disz*disz);
 			if(distance<15){
 				return false;
@@ -272,7 +307,7 @@ public class WoestijnScript : MonoBehaviour {
 	}
 	public int watercheck(double [] waterx, double [] waterz, double[] waterstraal, double x, double z){
 		double minafstand = 1000;
-		for (int i = 0; i < aantalVijvers; i ++) {
+		for (int i = 0; i < waterx.Length; i++) {
 			double xw = waterx[i];
 			double zw = waterz[i];
 			double r  = waterstraal[i];
@@ -280,16 +315,14 @@ public class WoestijnScript : MonoBehaviour {
 			double disz = z - zw;
 			double distance = Vector2.Distance(new Vector2((float)x,(float)z),new Vector2((float)xw,(float)zw));
 			double afstand = distance -r;
-			minafstand = Mathf.Min((float)minafstand,(float)afstand);
-			if(minafstand>8&&minafstand<12){
-				print(minafstand + " 1");
-				return 1;
-			}
-			if(minafstand>8&&minafstand>=12){
-				return 2;
-			}
+			minafstand = Mathf.Min((float)minafstand,(float)afstand);	
 		}
-		print(minafstand + " 0");
+		if(minafstand>7&&minafstand<10){
+			return 1;
+		}
+		if(minafstand>=10){
+			return 2;
+		}
 		return 0;
 	}
 	private void Smooth()

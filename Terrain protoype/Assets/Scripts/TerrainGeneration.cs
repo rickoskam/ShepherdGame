@@ -160,7 +160,7 @@ public class TerrainGeneration : MonoBehaviour {
 		}
 		return true;
 	}
-	void GenerateTrees(){
+	void PlaceObjects(){
 		GameObject hekPrefab = Resources.Load ("Hekje") as GameObject;
 		float lengteHek = hekPrefab.GetComponent<Renderer>().bounds.size.x*0.95f;
 		int aantalhekjesx = (int)(terraindata.size.x / lengteHek);
@@ -208,7 +208,7 @@ public class TerrainGeneration : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		GenerateTerrain ();
-		GenerateTrees ();
+		PlaceObjects ();
 
 
 	}

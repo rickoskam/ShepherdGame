@@ -11,7 +11,7 @@ public class WeideScript : MonoBehaviour {
 	public int aantalMeren;
 	void generateTerrain(){
 		TerrainData terraindata = terrain.terrainData;
-		int heightmapx = terraindata.heightmapWidth;
+		int heightmapx = terraindata.heightmapWidth;    
 		int heightmapz = terraindata.heightmapHeight;
 		float [] positionsx = new float[aantalHeuvels];
 		float[] positionsz = new  float[aantalHeuvels];
@@ -19,7 +19,7 @@ public class WeideScript : MonoBehaviour {
 		GameObject Schaap = Resources.Load ("sheep") as GameObject;
 		GameObject Steen = Resources.Load ("RockMesh") as GameObject;
 		float lengteHek = hekPrefab.GetComponent<Renderer>().bounds.size.x;
-		int levelsizex = (int)(levelgrootte*lengteHek);
+		int levelsizex = (int)(levelgrootte*lengteHek);  
 		int levelsizez = (int)(levelgrootte*lengteHek);
 		float beginhoogte = 0.008f;
 		float[,] heights = new float[heightmapx, heightmapz];
@@ -38,15 +38,13 @@ public class WeideScript : MonoBehaviour {
 		int hmlevelbeginz  = (int)(0.5 * heightmapx - 0.5 * hmlevellengthz);
 		int hmleveleindz   = (int)(0.5 * heightmapx + 0.5 * hmlevellengthz);
 
+		// set beginhoogte
 		for (int x = 0; x < heightmapx; x++) {
 			for(int z = 0; z < heightmapz; z++){
 				heights[x,z] = beginhoogte;
 			}
 		}
-		
-		terraindata.SetHeights(0,0,heights);
-	
-
+		terraindata.SetHeights(0,0,heights);		
 		// heuvels genereren in het level
 		for (int i = 0; i < aantalHeuvels; i++) {
 			int minradius = (int)(terrainsizex/55);
@@ -162,9 +160,13 @@ public class WeideScript : MonoBehaviour {
 		//hekjes spawnen
 		int aantalhekjesx = (int)(levelsizex / lengteHek);
 		int aantalhekjesz = (int)(levelsizez / lengteHek);
+
 		for (int i = 1; i < aantalhekjesx+2; i++) {
 			GameObject hek = Instantiate(hekPrefab);
-			hek.transform.position = new Vector3 (beginx + i * lengteHek, terrain.SampleHeight(new Vector3(0,0,0)), beginz);
+			float posx = beginx + i * lengteHek;
+			float posz = beginz;
+			hek.transform.position = new Vector3 (posx, Terrain.activeTerrain.SampleHeight(new Vector3(posx,0,posz)) 
+			                                      + Terrain.activeTerrain.transform.position.y, posz);
 		}
 		for (int i = 1; i < aantalhekjesx+2; i++) {
 			GameObject hek2 = Instantiate(hekPrefab);
@@ -205,6 +207,7 @@ public class WeideScript : MonoBehaviour {
 			Smooth();
 		}
 	}
+
 	public bool positioncheck(float x, float z, float[] xh, float[] zh){
 		for(int i = 0; i < aantalHeuvels; i++){
 			float disx = x - xh[i];
@@ -216,6 +219,7 @@ public class WeideScript : MonoBehaviour {
 		}
 		return true;
 	}
+
 	private void Smooth()
 	{
 		float[,] height = terrain.terrainData.GetHeights(0, 0, terrain.terrainData.heightmapWidth,
@@ -246,7 +250,6 @@ public class WeideScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		generateTerrain ();          
-
 
 	}
 	
