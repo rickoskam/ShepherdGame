@@ -28,7 +28,7 @@ using System;
 
             Socket acc = sck.Accept();
         // all the data will  be sent in one buffer.
-            byte[] buffer = Encoding.Default.GetBytes(name + a2);      
+            byte[] buffer = Encoding.Default.GetBytes(name + a2 + a3);      
            
             acc.Send(buffer, 0, buffer.Length, 0);
             buffer = new byte[255];

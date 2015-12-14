@@ -4,7 +4,7 @@ using System.Collections;
 public class Id : MonoBehaviour
 {
 
-    public static string name;
+    public static string name = "LOL";
 
     public void disable()
     {

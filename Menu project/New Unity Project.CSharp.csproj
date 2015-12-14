@@ -51,17 +51,11 @@
     <Reference Include="UnityEngine">
       <HintPath>Library\UnityAssemblies\UnityEngine.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.Advertisements">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Advertisements.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Networking">
       <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.Analytics">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Analytics.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
@@ -88,11 +82,14 @@
     <Compile Include="Assets\Scripts\PostData.cs" />
     <Compile Include="Assets\Scripts\PostData2.cs" />
     <Compile Include="Assets\Scripts\PostData3.cs" />
+    <Compile Include="Assets\Scripts\SendStatistics.cs" />
     <Compile Include="Assets\Scripts\TEST.cs" />
+    <Compile Include="Assets\Scripts\f.cs" />
     <Compile Include="Assets\Scripts\hover.cs" />
     <Compile Include="Assets\Scripts\link.cs" />
     <Compile Include="Assets\Scripts\onlineData.cs" />
     <Compile Include="Assets\Scripts\test1.cs" />
+    <Compile Include="Assets\fhh.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>
