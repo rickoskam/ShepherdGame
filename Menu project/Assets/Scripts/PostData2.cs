@@ -9,37 +9,54 @@ using System.Collections;
 
 public class PostData2 : MonoBehaviour {
 
-    public void sendData() {
-        String name = Id.name;
-        String a1 = "aantal schapen dood";
-        int a2 = link.a;
-        int y = 1;
+  public string url = "https://drproject.twi.tudelft.nl/ewi3620tu6/sendscores.php";
+    public WWW www;
 
-        string url = "https://drproject.twi.tudelft.nl/ewi3620tu6/";
+    public void send() { 
 
-        WWWForm form = new WWWForm();
-        // adding an int to a form
-        form.AddField("score", a2);
-        //adding a String to a form
-        form.AddField(name, 1);
-        WWW www = new WWW(url, form);
-        StartCoroutine(WaitForRequest(www));
+            StartCoroutine(WaitForRequest());
+
     }
 
-    IEnumerator WaitForRequest(WWW www)
+     public IEnumerator WaitForRequest()
+
     {
-        yield return www;
-        //check for errors
-        if (www.error == null)
+
+      //  yield return new WaitForEndOfFrame();
+        WWWForm form = new WWWForm();
+            form.AddField("username", Id.name);
+            form.AddField("wheatbought", f.aaa);
+            form.AddField("dogsbought", 3);
+            form.AddField("timeplayed", 4);
+            form.AddField("timeplayedlvl1", 5);
+            form.AddField("timeplayedlvl2", 6);
+            form.AddField("timeplayedlvl3", 7);
+            form.AddField("deathsinlvl1", 8);
+            form.AddField("deathsinlvl2", 9);
+            form.AddField("deathsinlvl3", 10);
+            form.AddField("sheepkilledinlvl1", 11);
+            form.AddField("sheepkilledinlvl2", 12);
+            form.AddField("sheepkilledinlvl3", 13);
+            form.AddField("score", 14);
+            www = new WWW(url, form);
+            yield return www;
+
+
+
+
+
+        if (!string.IsNullOrEmpty(www.error))
         {
-            Debug.Log("WWW Ok!: " + www.data);
+            print(www.error);
         }
         else
         {
-            Debug.Log("WWW Error: " + www.error);
+            print("Finished Uploading scores");
         }
 
-        }
+
     }
+}
+    
 
 	
