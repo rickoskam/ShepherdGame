@@ -3,17 +3,23 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class GraanScript : MonoBehaviour {
-    public int aantalgraangekocht = GraanWinkelScript.aantalgraangekocht; //PRIVATE MAKEN!
+    public static int aantalgraangekocht = GraanWinkelScript.aantalgraangekocht; //PRIVATE MAKEN!
     public Text AantalGraanText;
     public float speed = 1;
 
     private bool graantje = true;
     private bool aantrekking = false;
 
+    public static int Graangebruiktindezegame;
+
+    private int gr;
 
     // Use this for initialization
     void Start () {
+        //gr = gr + Graangebruiktindezegame;
+        //aantalgraangekocht = aantalgraangekocht - gr;
         SetAantalGraanText();
+        Graangebruiktindezegame = 0;
 	}
 	
 	// Update is called once per frame
@@ -28,6 +34,7 @@ public class GraanScript : MonoBehaviour {
 			StartCoroutine(TimerGraan());
             aantrekking = true;
             Herder.score = Herder.score - 100;
+            Graangebruiktindezegame = Graangebruiktindezegame + 1;
 		}
         if (aantrekking == true)
         {

@@ -66,22 +66,35 @@
     <Reference Include="UnityEditor.iOS.Extensions.Xcode">
       <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
     </Reference>
+    <Reference Include="System.Data">
+      <HintPath>Assets\DLLs\System.Data.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\CameraScript.cs" />
+    <Compile Include="Assets\Scripts\Credit_Camera.cs" />
     <Compile Include="Assets\Scripts\DeurScript.cs" />
     <Compile Include="Assets\Scripts\GiftigestruikScript.cs" />
     <Compile Include="Assets\Scripts\GraanScript.cs" />
     <Compile Include="Assets\Scripts\GraanWinkelScript.cs" />
     <Compile Include="Assets\Scripts\HeksScript.cs" />
     <Compile Include="Assets\Scripts\Herder.cs" />
+    <Compile Include="Assets\Scripts\HighScoreManager.cs" />
+    <Compile Include="Assets\Scripts\Highscores.cs" />
     <Compile Include="Assets\Scripts\HondScript.cs" />
     <Compile Include="Assets\Scripts\HondWinkelScript.cs" />
-    <Compile Include="Assets\Scripts\PlayKnop.cs" />
-    <Compile Include="Assets\Scripts\ReturnScript.cs" />
-    <Compile Include="Assets\Scripts\Schaap.cs" />
+    <Compile Include="Assets\Scripts\Id.cs" />
+    <Compile Include="Assets\Scripts\Main_Camera.cs" />
+    <Compile Include="Assets\Scripts\Main_Menu.cs" />
+    <Compile Include="Assets\Scripts\MovingCamera.cs" />
+    <Compile Include="Assets\Scripts\Options.cs" />
+    <Compile Include="Assets\Scripts\PostData.cs" />
     <Compile Include="Assets\Scripts\SchaapScript.cs" />
-    <Compile Include="Assets\Scripts\StartTekst.cs" />
+    <Compile Include="Assets\Scripts\SendStatistics.cs" />
+    <Compile Include="Assets\Scripts\hover.cs" />
+    <Compile Include="Assets\Scripts\link.cs" />
+    <Compile Include="Assets\Scripts\onlineData.cs" />
+    <Compile Include="Assets\fhh.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>

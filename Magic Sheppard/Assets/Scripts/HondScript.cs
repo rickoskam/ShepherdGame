@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class HondScript : MonoBehaviour {
-    public int aantalhondengekocht = HondWinkelScript.aantalhondgekocht; //PRIVATE MAKEN!
+    public static int aantalhondengekocht = HondWinkelScript.aantalhondgekocht; //PRIVATE MAKEN!
     public Text AantalHondenGekocht;
     bool aan = false;
     //float xbegin;
@@ -14,9 +14,12 @@ public class HondScript : MonoBehaviour {
     //bool n4 = false;
     Vector3 schaapplekje = new Vector3();
 
+    public static int Hondgebruiktindezegame;
+
     // Use this for initialization
     void Start() {
         SetAantalHondenText();
+        Hondgebruiktindezegame = 0;
     }
 
     // Update is called once per frame
@@ -81,6 +84,7 @@ public class HondScript : MonoBehaviour {
                 SetAantalHondenText();
                 StartCoroutine(Ronddraaien());
                 Herder.score = Herder.score - 100;
+                Hondgebruiktindezegame = Hondgebruiktindezegame + 1;
             }
 
             if (aan == true)

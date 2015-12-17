@@ -8,9 +8,11 @@ public class HeksScript : MonoBehaviour {
     float xdesiredr;
     float zdesiredr;
 
+    public static int aantalschapengedoodinditlevel;
+
     // Use this for initialization
     void Start () {
-	
+        aantalschapengedoodinditlevel = 0;
 	}
 	
 	// Update is called once per frame
@@ -139,6 +141,7 @@ public class HeksScript : MonoBehaviour {
         {
             //doodschieten effect
             o1.SetActive(false);
+            aantalschapengedoodinditlevel = aantalschapengedoodinditlevel + 1;
         }
     }
 }

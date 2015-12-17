@@ -38,8 +38,18 @@ public class Herder : MonoBehaviour {
     public Canvas Quitcanvas;
     public Button Nextlevel;
 
+    public static int gehaald;
+    private int aangeroepen;
+    public static float Tijd;
+    public static int aantalschapengenezen;
+    public static int aantalschapendood;
+    private int iii;
+
     // Use this for initialization
     void Start () {
+        iii = 1;
+        aantalschapendood = 0;
+        aantalschapengenezen = 0;
         score = 1000;
         SetScore();
         Wintext.text = "";
@@ -59,6 +69,9 @@ public class Herder : MonoBehaviour {
         Controlscanvas.gameObject.SetActive(false);
         Quitcanvas.gameObject.SetActive(false);
         Nextlevel.gameObject.SetActive(false);
+        gehaald = 2;
+        aangeroepen = 0;
+        Tijd = 0;
     }
 	
 	// Update is called once per frame
@@ -112,6 +125,8 @@ public class Herder : MonoBehaviour {
         if (leng == 0)
         {
             keuz = 0;
+            Ziekschaapslider.gameObject.SetActive(false);
+            Ziekschaapimage.gameObject.SetActive(false);
         }
 
         if (leng > 0)
@@ -134,11 +149,10 @@ public class Herder : MonoBehaviour {
                 if (xvers <10f && zvers<10f && Input.GetKey(KeyCode.Alpha3))
                 {
                     ziekschaap.tag = "Schaap";
+                    aantalschapengenezen = aantalschapengenezen + 1;
                     ziekschaap.GetComponent<Renderer>().material.color = Color.grey;
                     keuz = 0;
                     Ziekschaapslider.value = 20;
-                    Ziekschaapslider.gameObject.SetActive(false);
-                    Ziekschaapimage.gameObject.SetActive(false);
                     score = score + 500;
                     SetScore();
                 }
@@ -211,6 +225,7 @@ public class Herder : MonoBehaviour {
                 SetScore();
                 a = false;
             }
+            Tijd = Time.timeSinceLevelLoad;
             Wintext.text = "YOU WIN!";
             ScoreWintext.text = "" + score;
             TrofeeWin.gameObject.SetActive(true);
@@ -232,11 +247,18 @@ public class Herder : MonoBehaviour {
             Aantalgraan.gameObject.SetActive(false);
             Aantalhond.gameObject.SetActive(false);
             Score.gameObject.SetActive(false);
+            gehaald = 1;
+            if (aangeroepen == 0)
+            {
+                aangeroepen = 1;
+                Aanroep();
+            }
         }
 
         if (isl == 0 && leng == 0 && gsl == 0)
         {
             Wintext.text = "GAME OVER";
+            Tijd = Time.timeSinceLevelLoad;
             Ziekschaapslider.gameObject.SetActive(false);
             Ziekschaapimage.gameObject.SetActive(false);
             Aantalschapeninbarn.gameObject.SetActive(false);
@@ -253,7 +275,20 @@ public class Herder : MonoBehaviour {
             Aantalgraan.gameObject.SetActive(false);
             Aantalhond.gameObject.SetActive(false);
             Score.gameObject.SetActive(false);
+            gehaald = 0;
+            if (aangeroepen == 0)
+            {
+                aangeroepen = 1;
+                Aanroep();
+            }
         }
+    }
+
+    public static void Aanroep()
+    {
+       GameObject go = GameObject.FindGameObjectWithTag("Empty");
+       PostData other = (PostData)go.GetComponent(typeof(PostData));
+       other.send();
     }
 
     IEnumerator Timerziekschaap()
@@ -374,9 +409,12 @@ public class Herder : MonoBehaviour {
             Ziekschaapslider.value = 0;
             ziek[0].SetActive(false);
             keuz = 0;
+            if (iii == 1)
+            {
+                aantalschapendood = aantalschapendood + 1;
+                iii = 2;
+            }
             Ziekschaapslider.value = 20;
-            Ziekschaapslider.gameObject.SetActive(false);
-            Ziekschaapimage.gameObject.SetActive(false);
         }
     }
 
@@ -441,7 +479,17 @@ public class Herder : MonoBehaviour {
 
     public void SeriouslyQuit()
     {
-        Application.LoadLevel("Menu");
+        Application.LoadLevel("Main_Menu");
+    }
+
+    public void NextLevel2()
+    {
+        Application.LoadLevel("Level2");
+    }
+
+    public void NextLevel3()
+    {
+        Application.LoadLevel("Level3");
     }
 
     void SetScore()

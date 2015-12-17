@@ -4,9 +4,8 @@ using System.Collections;
 public class GiftigestruikScript : MonoBehaviour {
     private GameObject schaap;
 
-	// Use this for initialization
-	void Start () {
-	
+    // Use this for initialization
+    void Start () {
 	}
 	
 	// Update is called once per frame

@@ -7,15 +7,13 @@ public class SchaapScript : MonoBehaviour
 {
     public float speed = 1;
     private bool herdernietdichtbij = true;
-
-
+    
     void Start()
     {
         //        var K = GameObject.FindGameObjectWithTag("Kudde");
         //        float randx = Random.Range(0f, 10f);
         //        float randz = Random.Range(0f, 10f);
         //        K.transform.position = new Vector3(randx, 0, randz);
-
     }
 
     void Update()
@@ -34,8 +32,9 @@ public class SchaapScript : MonoBehaviour
             {
                 float randx = Random.Range(-10f, 10f);
                 float randz = Random.Range(-10f, 10f);
-                
-                schaapje.transform.Translate(new Vector3(randx*speed*Time.deltaTime*0.1f, 0.0f, randz*speed*Time.deltaTime*0.1f));
+
+                schaapje.transform.Translate(new Vector3(randx * speed * Time.deltaTime * 0.1f, 0.0f, randz * speed * Time.deltaTime * 0.1f));
+                ////                schaapje.transform.Rotate(new Vector3(0,(randx/randz),0));
                 //Vector3 direction1 = new Vector3(randx * speed * Time.deltaTime * 0.1f, 0.0f, randz * speed * Time.deltaTime * 0.1f);
                 //Quaternion lookrotation = Quaternion.LookRotation(direction1);
                 //transform.rotation = Quaternion.Slerp(transform.rotation, lookrotation, Time.deltaTime);
@@ -128,6 +127,7 @@ public class SchaapScript : MonoBehaviour
             {
                 herdernietdichtbij = false;
                 schaapje.transform.Translate(new Vector3(xkant * Time.deltaTime*speed, 0.0f, zkant * Time.deltaTime*speed));
+
             }
             else
             {
@@ -146,6 +146,7 @@ public class SchaapScript : MonoBehaviour
             float xrichting = randx - sheepx;
             float zrichting = randz - sheepz;
             gevschaap.transform.Translate(new Vector3(xrichting * speed * Time.deltaTime * 0.1f, 0.0f, zrichting * speed * Time.deltaTime * 0.1f));
+
         }
 
     }
